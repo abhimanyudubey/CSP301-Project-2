@@ -21,6 +21,24 @@ string getWord(string &source){
 	return word;
 }
 
+vector<bool> toBoolArray(int n, int N){
+	///This function converts a number _n_ into an array of boolean values, where the maximum bit length is _N_.
+	vector<bool> v_t;
+	N--;
+	while(N>0){
+		bool temp = N & 1;
+		N/=2;
+		v_t.push_back(temp);
+	}
+	vector<bool> v;
+	for(int i=0;i<v_t.size();i++){
+		bool temp = n & 1;
+		n/=2;
+		v.push_back(temp);
+	}
+	return v;
+}
+
 struct aGraph{
 	/** Basic graph structure for Analyzer.
 		nodeList	: is the list of all node labels.
@@ -304,18 +322,68 @@ matrix floydWarshall(matrix graph, int n){
 	return graph;
 }
 
+int getBoolSum(vector<bool> config){
+	int sum=0;
+	for(int i=0;i<config.size();i++)
+		if(config.at(i)) sum++;
+	return sum;
+}
+
+void printBool(vector<bool> source){
+	for(int i=0;i<source.size();i++)
+		cout << source.at(i)<<" ";
+	cout<<endl;
+}
+
 int getCliqueSize(int source, aGraph g){
 	/** This function returns the number of outgoing edges of the input node _source_. for a non-weighted adjacency
-	matrix.*/
-	bool am[g.nodeList.size()][g.nodeList.size()];
-	for(int i=0;i<nodeList.size();i++){
-		for(int j=0;j<nodeList.size();j++){
-			if(g.adjacencyMatrix[i][j]) am[i][j]=true;
-			else am[i][j]=false;
-		}
+	matrix. Our algorithm is O(2^n)*/
+	vector<int> neighbourList;
+	//List of all neighbors of the particular vertex.
+	for(int i=0;i<g.adjacencyMatrix.size();i++){
+		if(g.adjacencyMatrix.at(source).at(i)) neighbourList.push_back(i);
 	}
-	
-	//this works since adjacency matrix is non-weighted.
+	//Added all neighbors of the source to the list.
+
+	int nNeigh = neighbourList.size();
+	//Size of the neighbour list.
+	//cout <<nNeigh<<endl;
+
+	int nSubsets = pow(2,neighbourList.size());
+	//cout <<nSubsets<<endl;
+	//Created the number of possible subsets.
+
+	int maxsum=0,maxint=0;
+
+	for(int i=1;i<nSubsets;i++){
+		vector<bool> config = toBoolArray(i,nSubsets);
+		//cout<<"Binary Config ";printBool(config);
+		//This code prints the config.
+
+		int nNeighbors = getBoolSum(config);
+		//cout<<"number of neighbours "<<nNeighbors<<endl;
+		//Printing the number of neighbors.
+		int sum=0;
+		for(int j=0;j<nNeigh;j++){
+
+			for(int k=0;k<nNeigh;k++){
+				if(config.at(j)&&config.at(k)){
+					//If there is an edge between j and k in the neighbor graph.
+
+					int n1 = neighbourList.at(j);
+					int n2 = neighbourList.at(k);
+					//getting indexes in the main graph.
+
+					if(g.adjacencyMatrix.at(n1).at(n2)) sum++;
+					//if(j==k) sum++;
+					//cout<<"current value of sum "<<sum<<endl;
+				}
+			}
+			if(sum==(pow(nNeighbors,2)-nNeighbors) && sum>maxsum) maxint=nNeighbors;
+		}
+
+	}
+	return maxint+1;
 }
 
 vector<int> getNeighborhood(int source, aGraph g, vector<int> li){
@@ -429,26 +497,12 @@ int main(int argc, char** argv){
 	//Loaded graph from file.
 
 	int choice = atoi(argv[1]);
-	if(DEBUG) printAdjacencyMatrix(g);
-	for(int i=0;i<g.nodeList.size();i++){
-		for(int j=i+1;j<g.nodeList.size();j++){
-			vector<int> path = djikstraPath(i,j,g);
-			cout << "Path between "<< i <<" and "<< j <<" is "<<g.nodeList.at(path.at(0));
-				for(int k=1;k<path.size();k++){
-					cout<<"-->"<<g.nodeList.at(path.at(k));
-				}
-			cout<<endl;
-		}
-	}
-	for(int i=0;i<g.nodeList.size();i++)
-		cout<< i << " " << getImportance(g,i)<<endl;
 	switch(choice){
 		case 1:{
 			char* id = argv[2];
 			int gid = getGraphIndexFromGlobal(g,id);
 			vector<int> empty;
-			vector<int> clique =  getNeighborhood(gid, g, empty);
-			int cliqueSize = clique.size();
+			int cliqueSize = getCliqueSize(gid,g);
 			cliqueSize = cliqueSize == 0 ? 1:cliqueSize;
 			cout << "Size of clique for input node is "<<cliqueSize<<endl;
 			break;
