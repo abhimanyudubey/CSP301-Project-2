@@ -128,20 +128,29 @@ aGraph Parser(const char* fileName){
 	//Now to generate the Adjacency Matrix and assign weights in friendships.
 	if (DEBUG) cout<<nodeCount<<endl;
 	bool adjacencyMatrix[nodeCount][nodeCount];
+	for(int i=0;i<nodeCount;i++){
+		for(int j=0;j<nodeCount;j++){
+			adjacencyMatrix[i][j]=false;
+		}
+	}
 	if (DEBUG) cout<<"Adjacency Matrix created."<<endl;
 	for(int i=0;i<edgeMap.size();i++){
 		string s_node = sourceNode.at(i);
 		string t_node = targetNode.at(i);
 		int s_loc=-1,t_loc=-1;
 		for(int j=0;j<nodeMap.size();j++){
-			if(nodeMap.at(j)==s_node)
+			if(nodeMap.at(j)==s_node){
 				s_loc=j;
-			if(nodeMap.at(j)==t_node)
+				if(DEBUG) cout << s_loc << " s " <<s_node<<endl;
+			}
+			if(nodeMap.at(j)==t_node){
 				t_loc=j;
+				if(DEBUG) cout << t_loc << " t " <<t_node<<endl;
+			}
 		}
 		if(s_loc!=-1 && t_loc!=-1){
-			adjacencyMatrix[s_loc][t_loc]=1;
-			adjacencyMatrix[t_loc][s_loc]=1;
+			adjacencyMatrix[s_loc][t_loc]=true;
+			adjacencyMatrix[t_loc][s_loc]=true;
 			if(DEBUG>1)
 				cout << "edge detected"<<endl;
 		}
@@ -152,14 +161,10 @@ aGraph Parser(const char* fileName){
 	for(int i=0;i<nodeCount;i++){
 		std::vector<int> v;
 		for(int j=0;j<nodeCount;j++){
-			adjacencyMatrix[i][j]=adjacencyMatrix[i][j]==1? 1: 0;
-			v.push_back(adjacencyMatrix[i][j]);
-			if(DEBUG>0)
-				cout << adjacencyMatrix[i][j] << " ";
+			if(adjacencyMatrix[i][j]) v.push_back(1);
+			else v.push_back(0);
 		}
 		adj.push_back(v);
-		if(DEBUG>0)
-			cout <<endl;
 	}
 	aGraph out;
 	out.nodeList=nodeMap;
@@ -302,10 +307,14 @@ matrix floydWarshall(matrix graph, int n){
 int getCliqueSize(int source, aGraph g){
 	/** This function returns the number of outgoing edges of the input node _source_. for a non-weighted adjacency
 	matrix.*/
-	int sum=0;
-	for(int i=0;i<g.adjacencyMatrix.size();i++)
-		sum+=g.adjacencyMatrix.at(i).at(source);
-	return sum;
+	bool am[g.nodeList.size()][g.nodeList.size()];
+	for(int i=0;i<nodeList.size();i++){
+		for(int j=0;j<nodeList.size();j++){
+			if(g.adjacencyMatrix[i][j]) am[i][j]=true;
+			else am[i][j]=false;
+		}
+	}
+	
 	//this works since adjacency matrix is non-weighted.
 }
 
@@ -314,6 +323,7 @@ vector<int> getNeighborhood(int source, aGraph g, vector<int> li){
 	fully connected components in the graph containing that particular node.
 	Our algorithm is O(n^n). 
 	*/
+
 	int dim = g.adjacencyMatrix.size();
 	for(int i=0;i<dim;i++){
 		if(g.adjacencyMatrix.at(source).at(i)){
@@ -413,12 +423,25 @@ int getGraphIndexFromGlobal(aGraph g, char* id){
 }
 
 int main(int argc, char** argv){
-	const char* ff = "temp.temp";
+	const char* ff = "defaultOutput.graphml";
 	aGraph g = Parser(ff);
 	if(DEBUG) cout <<"Parsed graph."<<endl;
 	//Loaded graph from file.
 
 	int choice = atoi(argv[1]);
+	if(DEBUG) printAdjacencyMatrix(g);
+	for(int i=0;i<g.nodeList.size();i++){
+		for(int j=i+1;j<g.nodeList.size();j++){
+			vector<int> path = djikstraPath(i,j,g);
+			cout << "Path between "<< i <<" and "<< j <<" is "<<g.nodeList.at(path.at(0));
+				for(int k=1;k<path.size();k++){
+					cout<<"-->"<<g.nodeList.at(path.at(k));
+				}
+			cout<<endl;
+		}
+	}
+	for(int i=0;i<g.nodeList.size();i++)
+		cout<< i << " " << getImportance(g,i)<<endl;
 	switch(choice){
 		case 1:{
 			char* id = argv[2];
@@ -441,7 +464,7 @@ int main(int argc, char** argv){
 				vector<int> path = djikstraPath(id1,id2,g);
 				cout << "Path between "<< argv[2]<<" and "<<argv[3]<<" is "<<g.nodeList.at(path.at(0));
 				for(int i=1;i<path.size();i++){
-					cout<<"-->"<<g.nodeList.at(path.at(i))<<" ";
+					cout<<"-->"<<g.nodeList.at(path.at(i));
 				}
 				cout<<endl;
 			}
@@ -454,7 +477,7 @@ int main(int argc, char** argv){
 			if(path==0)
 				cout << "No path exists between input nodes."<<endl;
 			else
-				cout << "Size of path between "<< argv[2]<<" and "<<argv[3]<<" is "<<path;
+				cout << "Size of path between "<< argv[2]<<" and "<<argv[3]<<" is "<<path<<endl;
 			break;
 		}
 		case 4:{
