@@ -10,17 +10,32 @@
 using namespace std;
 
 typedef vector<vector<int> > matrix;
+///Typedef for matrix datatype, which is basically a vector of integer vectors. (std::vector).
 
 string getWord(string &source){
+	/** This function takes in a pointer to a string, and extracts the first word present in the string, and 
+	returns that word, and changes the pointer to point to the letter after the first space encountered.
+	*/
 	string word = source.substr(0, source.find(" "));
 	source = source.substr(source.find(" ")+1);
 	return word;
 }
 
 struct aGraph{
+	/** Basic graph structure for Analyzer.
+		nodeList	: is the list of all node labels.
+		sourceList	: is the list of sources for each edge.
+		targetList	: is the list of targets for each edge.
+		edgeList	: in graphML each edge has a label (which may be optional), and we store the label of
+					each edge in this list.
+		adjacencyMatrix 	: this variable is the adjacencyMatrix of the graph, or a matrix of boolean variables
+							where adjacencyMatrix(i,j) = 1 if i and j are connected, and
+							adjacencyMatrix(i,j) = 0 if they are not.
+
+							In our case, we use a non-directed graph, so the adjacencyMatrix is symmetric.
+	*/
 	vector<string> nodeList;
-	//Has the list of nodes with their labels. 
-	//TODO: Add the other properties of the label such as name and university.
+	//Has the list of nodes with their labels.
 	vector<string> sourceList;
 	//List of sources of each edge.
 	vector<string> targetList;
@@ -33,6 +48,8 @@ struct aGraph{
 };
 
 aGraph Parser(const char* fileName){
+	/** This function parses the graph in GraphML format, and returns an aGraph struct. */
+
 	int nodeCount=0;
 	std::vector<string> sourceNode,targetNode,nodeMap,edgeMap;
 	ifstream inFile;
@@ -103,13 +120,15 @@ aGraph Parser(const char* fileName){
 					cout << linef << endl;
 			}
 		}
-		cout<<"File ended."<<endl;
+		if(DEBUG)
+			cout<<"File ended."<<endl;
 	}
-	cout<<"file ended again."<<endl;
+	if(DEBUG)
+		cout<<"file ended again."<<endl;
 	//Now to generate the Adjacency Matrix and assign weights in friendships.
-	cout<<nodeCount<<endl;
+	if (DEBUG) cout<<nodeCount<<endl;
 	bool adjacencyMatrix[nodeCount][nodeCount];
-	cout<<"AdjMat created."<<endl;
+	if (DEBUG) cout<<"Adjacency Matrix created."<<endl;
 	for(int i=0;i<edgeMap.size();i++){
 		string s_node = sourceNode.at(i);
 		string t_node = targetNode.at(i);
@@ -153,6 +172,9 @@ aGraph Parser(const char* fileName){
 }
 
 int getMinimumDistance(int dist[], bool set[], int n){
+	/**	Helper function in Djikstra's algorithm implementation. This returns the index of the nearest element
+		to the input node _n_ where distances are stored in the list _dist_, and are not present in the set _set_.
+	*/
 	int min=NOPATH, index;
 	//vector<int> temp(dist, dist + sizeof dist/ sizeof dist[0]);
 	int le = n;
@@ -165,7 +187,10 @@ int getMinimumDistance(int dist[], bool set[], int n){
 	return index;
 }
 
-int dijkstraDistance(int sourceNode, int targetNode, aGraph g){
+int djikstraDistance(int sourceNode, int targetNode, aGraph g){
+	/** This function calculates the distance of one node (_sourceNode_) to another (_targetNode_) 
+	using Djikstra's algorithm in the graph _g_.
+	*/
 	int nNodes = g.nodeList.size();
 	int dist[nNodes];
 	bool set[nNodes];
@@ -190,13 +215,10 @@ int dijkstraDistance(int sourceNode, int targetNode, aGraph g){
 	return dist[targetNode];
 }
 
-int getShortestPath(int sourceNode, int targetNode, aGraph g){
-	matrix adj = g.adjacencyMatrix;
-	return 0;
-}
-
-
 int getNearestNode(vector<int> Q,bool visited[],int distance[]){
+	/** Helper function for Djikstra's path reconstruction algorithm. This function returns the unvisited nearest node 
+	present in the set _Q_, given the visited array _visited_ and the distance array _distance_.
+	*/
 	int min=NOPATH,l = Q.size(),min_index=0,global_index=0;
 	for(int i=0;i<l;i++){
 		int q = Q[i];
@@ -208,7 +230,11 @@ int getNearestNode(vector<int> Q,bool visited[],int distance[]){
 	}
 	return global_index;
 }
-vector<int> dijkstraPath(int sourceNode, int targetNode, aGraph g){
+
+vector<int> djikstraPath(int sourceNode, int targetNode, aGraph g){
+	/** This function returns the path from _sourceNode_ to _targetNode_ in the graph _g_ using Djikstra's path
+	reconstruction algorithm.
+	*/
 	matrix adj = g.adjacencyMatrix;
 	int N = g.nodeList.size();
 	int distance[N],previous[N];
@@ -254,6 +280,9 @@ vector<int> dijkstraPath(int sourceNode, int targetNode, aGraph g){
 }
 
 matrix floydWarshall(matrix graph, int n){
+	/** This function calculates the Floyd-Warshall all pair minimum distances using the Floyd-Warshall 
+	algorithm.*/
+
 	for(int i=0;i<n;i++){
 		for(int j=0;j<n;j++){
 			if(graph[i][j]==0)
@@ -271,6 +300,8 @@ matrix floydWarshall(matrix graph, int n){
 }
 
 int getCliqueSize(int source, aGraph g){
+	/** This function returns the number of outgoing edges of the input node _source_. for a non-weighted adjacency
+	matrix.*/
 	int sum=0;
 	for(int i=0;i<g.adjacencyMatrix.size();i++)
 		sum+=g.adjacencyMatrix.at(i).at(source);
@@ -279,8 +310,10 @@ int getCliqueSize(int source, aGraph g){
 }
 
 vector<int> getNeighborhood(int source, aGraph g, vector<int> li){
-	//This function returns the neighborhood of the particular node present in the graph. That is the set of 
-	//fully connected components in the graph containing that particular node.
+	/**This function returns the neighborhood of the particular node present in the graph. That is the set of 
+	fully connected components in the graph containing that particular node.
+	Our algorithm is O(n^n). 
+	*/
 	int dim = g.adjacencyMatrix.size();
 	for(int i=0;i<dim;i++){
 		if(g.adjacencyMatrix.at(source).at(i)){
@@ -313,6 +346,7 @@ vector<int> getNeighborhood(int source, aGraph g, vector<int> li){
 }
 
 int shortestPathOnGraph(aGraph g){
+	/**returns the shortest path present between any two nodes in the graph using Floyd-Warshall's algorithm.*/
 	matrix fw = floydWarshall(g.adjacencyMatrix,g.nodeList.size());
 	int min=fw[0][0];
 	for(int i=0;i<fw.size();i++){
@@ -325,6 +359,7 @@ int shortestPathOnGraph(aGraph g){
 }
 
 void printAdjacencyMatrix(aGraph g){
+	///Helper function which prints the adjacency matrix of the graph.
 	matrix mat = g.adjacencyMatrix;
 	int N = mat.size();
 	for(int i=0;i<N;i++){
@@ -336,13 +371,14 @@ void printAdjacencyMatrix(aGraph g){
 }
 
 int getImportance(aGraph g, int source){
+	///Returns the importance of a person in the graph.
 	int N = g.adjacencyMatrix.size();
 	int importance[N];
 	for(int i=0;i<N;i++) importance[i]=0;
 
 	for(int i=0;i<N;i++){
 		for(int j=i+1;j<N;j++){
-			vector<int> path = dijkstraPath(i,j,g);
+			vector<int> path = djikstraPath(i,j,g);
 			int ps = path.size();
 			for(int k=0;k<ps;k++){
 				int n = path.at(k);
@@ -354,6 +390,7 @@ int getImportance(aGraph g, int source){
 }
 
 bool compareImportance(aGraph g, int source){
+	///Returns the boolean of whether a person has friends more important than them.
 	int N=g.adjacencyMatrix.size(),imp=getImportance(g,source);
 	for(int i=0;i<N;i++){
 		if(g.adjacencyMatrix.at(source).at(i)){
@@ -366,6 +403,7 @@ bool compareImportance(aGraph g, int source){
 }
 
 int getGraphIndexFromGlobal(aGraph g, char* id){
+	///Returns index in local graph for a given node label.
 	for(int i=0;i<g.nodeList.size();i++){
 		if(g.nodeList.at(i)==id){
 			return i;
@@ -377,7 +415,7 @@ int getGraphIndexFromGlobal(aGraph g, char* id){
 int main(int argc, char** argv){
 	const char* ff = "temp.temp";
 	aGraph g = Parser(ff);
-	cout <<"Parsed graph."<<endl;
+	if(DEBUG) cout <<"Parsed graph."<<endl;
 	//Loaded graph from file.
 
 	int choice = atoi(argv[1]);
@@ -388,25 +426,35 @@ int main(int argc, char** argv){
 			vector<int> empty;
 			vector<int> clique =  getNeighborhood(gid, g, empty);
 			int cliqueSize = clique.size();
+			cliqueSize = cliqueSize == 0 ? 1:cliqueSize;
 			cout << "Size of clique for input node is "<<cliqueSize<<endl;
 			break;
 		}
 		case 3:{
 			int id1 = getGraphIndexFromGlobal(g,argv[2]);
 			int id2 = getGraphIndexFromGlobal(g,argv[3]);
-			vector<int> path = dijkstraPath(id1,id2,g);
-			cout << "Path between "<< argv[2]<<" and "<<argv[3]<<" is ";
-			for(int i=0;i<path.size();i++){
-				cout<<g.nodeList.at(path.at(i))<<" ";
+			int plength = djikstraDistance(id1,id2,g);
+			if(plength==0){
+				cout<<"No path exists between input nodes."<<endl;
 			}
-			cout<<endl;
+			else{
+				vector<int> path = djikstraPath(id1,id2,g);
+				cout << "Path between "<< argv[2]<<" and "<<argv[3]<<" is "<<g.nodeList.at(path.at(0));
+				for(int i=1;i<path.size();i++){
+					cout<<"-->"<<g.nodeList.at(path.at(i))<<" ";
+				}
+				cout<<endl;
+			}
 			break;
 		}
 		case 2:{
 			int id1 = getGraphIndexFromGlobal(g,argv[2]);
 			int id2 = getGraphIndexFromGlobal(g,argv[3]);
-			vector<int> path = dijkstraPath(id1,id2,g);
-			cout << "Size of path between "<< argv[2]<<" and "<<argv[3]<<" is "<<path.size()<<endl;
+			int path = djikstraDistance(id1,id2,g);
+			if(path==0)
+				cout << "No path exists between input nodes."<<endl;
+			else
+				cout << "Size of path between "<< argv[2]<<" and "<<argv[3]<<" is "<<path;
 			break;
 		}
 		case 4:{
