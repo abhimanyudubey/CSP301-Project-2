@@ -1,0 +1,123 @@
+\hypertarget{generate_friends_8cpp}{\section{generate\-Friends.\-cpp File Reference}
+\label{generate_friends_8cpp}\index{generate\-Friends.\-cpp@{generate\-Friends.\-cpp}}
+}
+{\ttfamily \#include \char`\"{}generate\-Friends.\-h\char`\"{}}\\*
+{\ttfamily \#include $<$string.\-h$>$}\\*
+{\ttfamily \#include $<$fstream$>$}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_student}{Student} \hyperlink{generate_friends_8cpp_a5eac01290f946082adb8e920f06d830a}{get\-Student\-Sender} (\hyperlink{struct_university}{University} u, int local\-Num)
+\item 
+struct \hyperlink{struct_student}{Student} \hyperlink{generate_friends_8cpp_a4c53d7f89af0ddf1e3361af4dfa0c06a}{get\-Student\-Receiver} (vector$<$ \hyperlink{struct_university}{University} $>$ u, int iter, int local\-Num)
+\item 
+int \hyperlink{generate_friends_8cpp_ad4ad4c50e17895db30d897b6ae1054cf}{get\-Course\-Friend} (\hyperlink{struct_university}{University} u, \hyperlink{struct_student}{Student} s)
+\item 
+int \hyperlink{generate_friends_8cpp_a0d729e4e1bb55599e107931847efda07}{get\-Dept\-Friend} (\hyperlink{struct_university}{University} u, \hyperlink{struct_student}{Student} s)
+\item 
+int \hyperlink{generate_friends_8cpp_a27a34dc8ee53703802965a5f3c0777fe}{get\-Nbour\-Friend} (\hyperlink{struct_university}{University} u, \hyperlink{struct_student}{Student} s)
+\item 
+int \hyperlink{generate_friends_8cpp_a2cc32847f9ed23fec4ccb1f5cac6a360}{get\-Interest\-Friend} (\hyperlink{struct_university}{University} u, \hyperlink{struct_student}{Student} s)
+\item 
+\hypertarget{generate_friends_8cpp_ac18d46581944105fb738dcbae87dc61e}{void {\bfseries generate\-Friends} (vector$<$ \hyperlink{struct_university}{University} $>$ u, vector$<$ bool $>$ is\-\_\-generate, int Student\-Counter)}\label{generate_friends_8cpp_ac18d46581944105fb738dcbae87dc61e}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A file containing necessary code for running the thread \hyperlink{generate_friends_8cpp}{generate\-Friends.\-cpp} 
+
+\subsection{Function Documentation}
+\hypertarget{generate_friends_8cpp_ad4ad4c50e17895db30d897b6ae1054cf}{\index{generate\-Friends.\-cpp@{generate\-Friends.\-cpp}!get\-Course\-Friend@{get\-Course\-Friend}}
+\index{get\-Course\-Friend@{get\-Course\-Friend}!generateFriends.cpp@{generate\-Friends.\-cpp}}
+\subsubsection[{get\-Course\-Friend}]{\setlength{\rightskip}{0pt plus 5cm}int get\-Course\-Friend (
+\begin{DoxyParamCaption}
+\item[{{\bf University}}]{u, }
+\item[{{\bf Student}}]{s}
+\end{DoxyParamCaption}
+)}}\label{generate_friends_8cpp_ad4ad4c50e17895db30d897b6ae1054cf}
+
+\begin{DoxyParams}{Parameters}
+{\em u} & The university from where the friendship request is sent. \\
+\hline
+{\em s} & The student who sent out the friend request. \\
+\hline
+\end{DoxyParams}
+\hypertarget{generate_friends_8cpp_a0d729e4e1bb55599e107931847efda07}{\index{generate\-Friends.\-cpp@{generate\-Friends.\-cpp}!get\-Dept\-Friend@{get\-Dept\-Friend}}
+\index{get\-Dept\-Friend@{get\-Dept\-Friend}!generateFriends.cpp@{generate\-Friends.\-cpp}}
+\subsubsection[{get\-Dept\-Friend}]{\setlength{\rightskip}{0pt plus 5cm}int get\-Dept\-Friend (
+\begin{DoxyParamCaption}
+\item[{{\bf University}}]{u, }
+\item[{{\bf Student}}]{s}
+\end{DoxyParamCaption}
+)}}\label{generate_friends_8cpp_a0d729e4e1bb55599e107931847efda07}
+
+\begin{DoxyParams}{Parameters}
+{\em u} & The university from where the friendship request is sent. \\
+\hline
+{\em s} & The student who sent out the friend request. \\
+\hline
+\end{DoxyParams}
+\hypertarget{generate_friends_8cpp_a2cc32847f9ed23fec4ccb1f5cac6a360}{\index{generate\-Friends.\-cpp@{generate\-Friends.\-cpp}!get\-Interest\-Friend@{get\-Interest\-Friend}}
+\index{get\-Interest\-Friend@{get\-Interest\-Friend}!generateFriends.cpp@{generate\-Friends.\-cpp}}
+\subsubsection[{get\-Interest\-Friend}]{\setlength{\rightskip}{0pt plus 5cm}int get\-Interest\-Friend (
+\begin{DoxyParamCaption}
+\item[{{\bf University}}]{u, }
+\item[{{\bf Student}}]{s}
+\end{DoxyParamCaption}
+)}}\label{generate_friends_8cpp_a2cc32847f9ed23fec4ccb1f5cac6a360}
+
+\begin{DoxyParams}{Parameters}
+{\em u} & The university from where the friendship request is sent. \\
+\hline
+{\em s} & The student who sent out the friend request. \\
+\hline
+\end{DoxyParams}
+\hypertarget{generate_friends_8cpp_a27a34dc8ee53703802965a5f3c0777fe}{\index{generate\-Friends.\-cpp@{generate\-Friends.\-cpp}!get\-Nbour\-Friend@{get\-Nbour\-Friend}}
+\index{get\-Nbour\-Friend@{get\-Nbour\-Friend}!generateFriends.cpp@{generate\-Friends.\-cpp}}
+\subsubsection[{get\-Nbour\-Friend}]{\setlength{\rightskip}{0pt plus 5cm}int get\-Nbour\-Friend (
+\begin{DoxyParamCaption}
+\item[{{\bf University}}]{u, }
+\item[{{\bf Student}}]{s}
+\end{DoxyParamCaption}
+)}}\label{generate_friends_8cpp_a27a34dc8ee53703802965a5f3c0777fe}
+
+\begin{DoxyParams}{Parameters}
+{\em u} & The university from where the friendship request is sent. \\
+\hline
+{\em s} & The student who sent out the friend request. \\
+\hline
+\end{DoxyParams}
+\hypertarget{generate_friends_8cpp_a4c53d7f89af0ddf1e3361af4dfa0c06a}{\index{generate\-Friends.\-cpp@{generate\-Friends.\-cpp}!get\-Student\-Receiver@{get\-Student\-Receiver}}
+\index{get\-Student\-Receiver@{get\-Student\-Receiver}!generateFriends.cpp@{generate\-Friends.\-cpp}}
+\subsubsection[{get\-Student\-Receiver}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf Student} get\-Student\-Receiver (
+\begin{DoxyParamCaption}
+\item[{vector$<$ {\bf University} $>$}]{u, }
+\item[{int}]{iter, }
+\item[{int}]{local\-Num}
+\end{DoxyParamCaption}
+)}}\label{generate_friends_8cpp_a4c53d7f89af0ddf1e3361af4dfa0c06a}
+
+\begin{DoxyParams}{Parameters}
+{\em u} & The vector of universities from which the student receiver is selected. \\
+\hline
+{\em iter} & The university number from which th friend request is generated. \\
+\hline
+{\em local\-Num} & A temporary variable used for ascertaining the student receiving the friend request. \\
+\hline
+\end{DoxyParams}
+\hypertarget{generate_friends_8cpp_a5eac01290f946082adb8e920f06d830a}{\index{generate\-Friends.\-cpp@{generate\-Friends.\-cpp}!get\-Student\-Sender@{get\-Student\-Sender}}
+\index{get\-Student\-Sender@{get\-Student\-Sender}!generateFriends.cpp@{generate\-Friends.\-cpp}}
+\subsubsection[{get\-Student\-Sender}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf Student} get\-Student\-Sender (
+\begin{DoxyParamCaption}
+\item[{{\bf University}}]{u, }
+\item[{int}]{local\-Num}
+\end{DoxyParamCaption}
+)}}\label{generate_friends_8cpp_a5eac01290f946082adb8e920f06d830a}
+
+\begin{DoxyParams}{Parameters}
+{\em u} & The university from which the student sender is selected. \\
+\hline
+{\em local\-Num} & A temporary variable used for ascertaining the student in the university sending the friend request. \\
+\hline
+\end{DoxyParams}

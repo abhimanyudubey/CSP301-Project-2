@@ -1,0 +1,33 @@
+\hypertarget{structa_graph}{\section{a\-Graph Struct Reference}
+\label{structa_graph}\index{a\-Graph@{a\-Graph}}
+}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ string $>$ \hyperlink{structa_graph_a24704c7ee0c26fa0b6ee3a3e573e7f26}{node\-List}
+\item 
+\hypertarget{structa_graph_aebf17e38c2240d272d5542817462b17b}{vector$<$ string $>$ {\bfseries source\-List}}\label{structa_graph_aebf17e38c2240d272d5542817462b17b}
+
+\item 
+\hypertarget{structa_graph_a445e0a78861c99bde1bd67b3df42b95b}{vector$<$ string $>$ {\bfseries target\-List}}\label{structa_graph_a445e0a78861c99bde1bd67b3df42b95b}
+
+\item 
+\hypertarget{structa_graph_afef9e772dd78c78cf0d18f93b8c15bb9}{vector$<$ string $>$ {\bfseries edge\-List}}\label{structa_graph_afef9e772dd78c78cf0d18f93b8c15bb9}
+
+\item 
+\hypertarget{structa_graph_a3fe81eecfe70643373a04548bbc7af2e}{matrix {\bfseries adjacency\-Matrix}}\label{structa_graph_a3fe81eecfe70643373a04548bbc7af2e}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{structa_graph_a24704c7ee0c26fa0b6ee3a3e573e7f26}{\index{a\-Graph@{a\-Graph}!node\-List@{node\-List}}
+\index{node\-List@{node\-List}!aGraph@{a\-Graph}}
+\subsubsection[{node\-List}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$string$>$ a\-Graph\-::node\-List}}\label{structa_graph_a24704c7ee0c26fa0b6ee3a3e573e7f26}
+Basic graph structure for Analyzer. node\-List \-: is the list of all node labels. source\-List \-: is the list of sources for each edge. target\-List \-: is the list of targets for each edge. edge\-List \-: in graph\-M\-L each edge has a label (which may be optional), and we store the label of each edge in this list. adjacency\-Matrix \-: this variable is the adjacency\-Matrix of the graph, or a matrix of boolean variables where adjacency\-Matrix(i,j) = 1 if i and j are connected, and adjacency\-Matrix(i,j) = 0 if they are not.
+
+In our case, we use a non-\/directed graph, so the adjacency\-Matrix is symmetric. 
+
+The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+Analyzer.\-cpp\end{DoxyCompactItemize}

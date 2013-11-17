@@ -1,0 +1,32 @@
+\hypertarget{generate_faculty_8cpp}{\section{generate\-Faculty.\-cpp File Reference}
+\label{generate_faculty_8cpp}\index{generate\-Faculty.\-cpp@{generate\-Faculty.\-cpp}}
+}
+{\ttfamily \#include \char`\"{}generate\-Faculty.\-h\char`\"{}}\\*
+{\ttfamily \#include $<$string.\-h$>$}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{generate_faculty_8cpp_aa71b3ff525c551bbd595c9151af63036}{generate\-Faculty} (vector$<$ \hyperlink{struct_university}{University} $>$ \&u, int \&Faculty\-Counter)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A file containing necessary code for running the thread \hyperlink{generate_faculty_8cpp}{generate\-Faculty.\-cpp} 
+
+\subsection{Function Documentation}
+\hypertarget{generate_faculty_8cpp_aa71b3ff525c551bbd595c9151af63036}{\index{generate\-Faculty.\-cpp@{generate\-Faculty.\-cpp}!generate\-Faculty@{generate\-Faculty}}
+\index{generate\-Faculty@{generate\-Faculty}!generateFaculty.cpp@{generate\-Faculty.\-cpp}}
+\subsubsection[{generate\-Faculty}]{\setlength{\rightskip}{0pt plus 5cm}void generate\-Faculty (
+\begin{DoxyParamCaption}
+\item[{vector$<$ {\bf University} $>$ \&}]{u, }
+\item[{int \&}]{Faculty\-Counter}
+\end{DoxyParamCaption}
+)}}\label{generate_faculty_8cpp_aa71b3ff525c551bbd595c9151af63036}
+
+\begin{DoxyParams}{Parameters}
+{\em u} & The vector of universities belonging to the social network. \\
+\hline
+{\em Faculty\-Counter} & The global counter for total number of faculty in the social network.\\
+\hline
+\end{DoxyParams}
+Thread generate\-Faculty, creates faculty nodes. All faculty members are generated at time 0, at the beginning of simulation. Each generated faculty member has a sequentially increasing employee code, and a random name, department, house, and set of interests. 

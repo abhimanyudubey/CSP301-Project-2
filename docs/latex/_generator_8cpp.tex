@@ -1,0 +1,80 @@
+\hypertarget{_generator_8cpp}{\section{Generator.\-cpp File Reference}
+\label{_generator_8cpp}\index{Generator.\-cpp@{Generator.\-cpp}}
+}
+{\ttfamily \#include $<$fcntl.\-h$>$}\\*
+{\ttfamily \#include $<$resolv.\-h$>$}\\*
+{\ttfamily \#include $<$stdio.\-h$>$}\\*
+{\ttfamily \#include $<$math.\-h$>$}\\*
+{\ttfamily \#include $<$string.\-h$>$}\\*
+{\ttfamily \#include $<$sys/socket.\-h$>$}\\*
+{\ttfamily \#include $<$netinet/in.\-h$>$}\\*
+{\ttfamily \#include $<$arpa/inet.\-h$>$}\\*
+{\ttfamily \#include $<$stdlib.\-h$>$}\\*
+{\ttfamily \#include $<$unistd.\-h$>$}\\*
+{\ttfamily \#include $<$errno.\-h$>$}\\*
+{\ttfamily \#include $<$sys/types.\-h$>$}\\*
+{\ttfamily \#include $<$time.\-h$>$}\\*
+{\ttfamily \#include $<$vector$>$}\\*
+{\ttfamily \#include $<$pthread.\-h$>$}\\*
+{\ttfamily \#include $<$netdb.\-h$>$}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$assert.\-h$>$}\\*
+{\ttfamily \#include $<$fstream$>$}\\*
+{\ttfamily \#include $<$sstream$>$}\\*
+{\ttfamily \#include $<$random$>$}\\*
+{\ttfamily \#include \char`\"{}omp.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Generator.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Network.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}generate\-Faculty.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}generate\-Student.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}generate\-Courses.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}generate\-Friends.\-h\char`\"{}}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structuni_i_d}{uni\-I\-D}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{_generator_8cpp_a3ed9cfd273f7291e3077e24cc568ab3f}{char $\ast$ {\bfseries random\-String} (int max\-Len, int seed)}\label{_generator_8cpp_a3ed9cfd273f7291e3077e24cc568ab3f}
+
+\item 
+\hypertarget{_generator_8cpp_ae00948593c4a23c18d81096122535141}{string {\bfseries get\-Word} (string \&source)}\label{_generator_8cpp_ae00948593c4a23c18d81096122535141}
+
+\item 
+\hypertarget{_generator_8cpp_ac1e46ee18616cad35bf1509bd5ed9f5b}{\hyperlink{structuni_i_d}{uni\-I\-D} {\bfseries get\-Identifier} (vector$<$ \hyperlink{struct_university}{University} $>$ u, int global\-Num)}\label{_generator_8cpp_ac1e46ee18616cad35bf1509bd5ed9f5b}
+
+\item 
+void \hyperlink{_generator_8cpp_a031114738bffffcd0a19f0cc2ecf8a5a}{print\-Graph} (vector$<$ \hyperlink{struct_university}{University} $>$ u, int Student\-Counter, int Faculty\-Counter)
+\item 
+\hypertarget{_generator_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{int {\bfseries main} (int argc, char $\ast$$\ast$argv)}\label{_generator_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A file containing necessary code for running the Generator process.
+
+A file containing necessary code for running the Time\-Keeper process. 
+
+\subsection{Function Documentation}
+\hypertarget{_generator_8cpp_a031114738bffffcd0a19f0cc2ecf8a5a}{\index{Generator.\-cpp@{Generator.\-cpp}!print\-Graph@{print\-Graph}}
+\index{print\-Graph@{print\-Graph}!Generator.cpp@{Generator.\-cpp}}
+\subsubsection[{print\-Graph}]{\setlength{\rightskip}{0pt plus 5cm}void print\-Graph (
+\begin{DoxyParamCaption}
+\item[{vector$<$ {\bf University} $>$}]{u, }
+\item[{int}]{Student\-Counter, }
+\item[{int}]{Faculty\-Counter}
+\end{DoxyParamCaption}
+)}}\label{_generator_8cpp_a031114738bffffcd0a19f0cc2ecf8a5a}
+
+\begin{DoxyParams}{Parameters}
+{\em u} & The vector of universities belonging to the social network. \\
+\hline
+{\em Student\-Counter} & The global counter for total number of students in the social network. \\
+\hline
+{\em Faculty\-Counter} & The global counter for total number of faculty in the social network.\\
+\hline
+\end{DoxyParams}
+print\-Graph writes the graph in Graph\-M\-L format in the file default\-Output.\-graphml. 

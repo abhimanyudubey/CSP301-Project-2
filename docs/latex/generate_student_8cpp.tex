@@ -1,0 +1,42 @@
+\hypertarget{generate_student_8cpp}{\section{generate\-Student.\-cpp File Reference}
+\label{generate_student_8cpp}\index{generate\-Student.\-cpp@{generate\-Student.\-cpp}}
+}
+{\ttfamily \#include \char`\"{}generate\-Student.\-h\char`\"{}}\\*
+{\ttfamily \#include $<$string.\-h$>$}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{generate_student_8cpp_a96a8e7243196a3a7218d54a70dd08673}{generate\-Student} (vector$<$ \hyperlink{struct_university}{University} $>$ \&u, vector$<$ int $>$ \&codes, int \&Student\-Counter)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A file containing necessary code for running the thread \hyperlink{generate_student_8cpp}{generate\-Student.\-cpp} 
+
+\subsection{Function Documentation}
+\hypertarget{generate_student_8cpp_a96a8e7243196a3a7218d54a70dd08673}{\index{generate\-Student.\-cpp@{generate\-Student.\-cpp}!generate\-Student@{generate\-Student}}
+\index{generate\-Student@{generate\-Student}!generateStudent.cpp@{generate\-Student.\-cpp}}
+\subsubsection[{generate\-Student}]{\setlength{\rightskip}{0pt plus 5cm}void generate\-Student (
+\begin{DoxyParamCaption}
+\item[{vector$<$ {\bf University} $>$ \&}]{u, }
+\item[{vector$<$ int $>$ \&}]{codes, }
+\item[{int \&}]{Student\-Counter}
+\end{DoxyParamCaption}
+)}}\label{generate_student_8cpp_a96a8e7243196a3a7218d54a70dd08673}
+
+\begin{DoxyParams}{Parameters}
+{\em u} & The vector of universities belonging to the social network.\\
+\hline
+\end{DoxyParams}
+Thread generate\-Courses creates courses “once every semester.\-” It generates courses and registers students. In other words it edits students' course data. It does not create any new nodes. It also registers students in a course – each student is registered for “semester\-\_\-dept\-\_\-courses” courses of their department and “semester\-\_\-nondept\-\_\-courses” courses of some other (randomly chosen) departments.
+
+
+\begin{DoxyParams}{Parameters}
+{\em u} & The vector of universities belonging to the social network. \\
+\hline
+{\em codes} & The vector to keep track of the last assigned student codes for all universities. \\
+\hline
+{\em Student\-Counter} & The global counter for total number of students in the social network.\\
+\hline
+\end{DoxyParams}
+Thread generate\-Student generates \hyperlink{struct_student}{Student} nodes, each with a sequential entry no and randomly generated name, department, hostel and a set of interests. 
